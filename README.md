@@ -1,5 +1,7 @@
 # GCE-SSH-CloudFunction
 
+![RequestFlow](images/GCF-SSH-GCE.png)
+
 This repo holds the Python Code based on [tutorial on ssh to a Compute Engine VM](https://cloud.google.com/compute/docs/tutorials/service-account-ssh) that can be used to ssh to a Google Compute Engine VM via CloudFunction and execute the commands based on an event driven triggers.
 
 
@@ -25,3 +27,25 @@ This repo holds the Python Code based on [tutorial on ssh to a Compute Engine VM
     ```
 
 > Note:- It is recommended to [Configure Serverless VPC Access](https://cloud.google.com/vpc/docs/configure-serverless-vpc-access) to access the VPC resources (In this case GCE VM's private interface) via private ip.
+
+
+
+## Trigger CloudFunction using Https url via code
+
+To understand how to handel the events emitted due to https trigger of CloudFunction See the [HTTP function tutorial](https://cloud.google.com/functions/docs/tutorials/http) for an example of writing, deploying, and calling an HTTP function. 
+
+Also please read [Authenticating for invocation](https://cloud.google.com/functions/docs/securing/authenticating). 
+
+Basically To get your credentials use the Google Auth Client library. If you are testing from local you should create a service account JSON and load it to the environment variable GOOGLE_APPLICATION_CREDENTIALS
+
+Which can be passed as a header while making the call to cloudFunction detailed below in the boiler plate code
+
+```
+ auth_req = google.auth.transport.requests.Request()
+auth_token = google.oauth2.id_token.fetch_id_token(auth_req, cloud_function_url)
+
+response = requests.post(cloud_function_url, json=payload, headers={"Authorization" : f"Bearer {auth_token}"})
+```
+
+
+
