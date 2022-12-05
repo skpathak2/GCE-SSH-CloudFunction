@@ -51,7 +51,7 @@ Basically To get your credentials use the Google Auth Client library. If you are
 Which can be passed as a header while making the call to cloudFunction detailed below in the boiler plate code
 
 ```
- auth_req = google.auth.transport.requests.Request()
+auth_req = google.auth.transport.requests.Request()
 auth_token = google.oauth2.id_token.fetch_id_token(auth_req, cloud_function_url)
 
 response = requests.post(cloud_function_url, json=payload, headers={"Authorization" : f"Bearer {auth_token}"})
