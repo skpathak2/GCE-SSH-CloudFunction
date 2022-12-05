@@ -28,6 +28,16 @@ This repo holds the Python Code based on [tutorial on ssh to a Compute Engine VM
 
 > Note:- It is recommended to [Configure Serverless VPC Access](https://cloud.google.com/vpc/docs/configure-serverless-vpc-access) to access the VPC resources (In this case GCE VM's private interface) via private ip.
 
+3. Create a `CloudFunction` using following parameter
+```
+Runtime : Python 3.9 
+Entry point : gce_ssh
+Copy the code from cloudFunSSH.py to Main.py
+Update the requirements.txt as per the file in this repo
+```
+
+4. As per your use case please select a trigger and manage the event in your cloud function code.
+
 
 
 ## Trigger CloudFunction using Https url via code
